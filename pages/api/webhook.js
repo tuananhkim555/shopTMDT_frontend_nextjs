@@ -29,14 +29,23 @@ export default async function handler(req, res) {
     switch (event.type) {
         case 'checkout.session.completed':
             const data = event.data.object;
+            console.log('Received checkout.session.completed event:', data);
+
             const orderId = data.metadata.orderId;
             const paid = data.payment_status === 'paid';
+            console.log('Order ID:', orderId);
+            console.log('Payment status:', paid);
+
             if(orderId && paid) {
-                await Order.findByIdAndUpdate(orderId, {
-                    paid:true,
-                })
+                try {
+                    const updatedOrder = await Order.findByIdAndUpdate(orderId, { paid: true });
+                    console.log('Order updated:', updatedOrder);
+                } catch (error) {
+                    console.error('Error updating order:', error);
+                }
+            } else {
+                console.log('Order ID or payment status is missing/incorrect');
             }
-            // Thêm logic xử lý khi thanh toán thành công
             break;
         default:
             console.log(`Unhandled event type ${event.type}`);
@@ -52,7 +61,5 @@ export const config = {
     },
 };
 
-
-
-//proven-vivid-leads-helped
+//cozy-amply-poise-hot
 // acct_1PZi1HCQLSFPmvdi
