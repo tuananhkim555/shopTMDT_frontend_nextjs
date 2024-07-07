@@ -22,6 +22,12 @@ export const ButtonStyle = css`
                 margin-right: 5px;
 
             }
+
+            ${props => props.block && css`
+                display: block;
+                width: 100%;
+            `};
+
             ${props => props.white && !props.outline && css`
                  background-color:#fff;
                  color:#000;   
@@ -29,6 +35,16 @@ export const ButtonStyle = css`
               ${props => props.white && props.outline && css`
                  background-color:transparent;
                  color:#fff;   
+                 border: 1px solid #fff;
+            `}
+            ${props => props.black && !props.outline && css`
+                 background-color:#000;
+                 color:#fff;   
+            `}
+              ${props => props.black && props.outline && css`
+                 background-color:transparent;
+                 color:#000;
+                 border: 1px solid #000;   
             `}
 
             ${props => props.primary && !props.outline && css`
