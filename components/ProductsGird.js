@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import ProductBox from "./ProductBox";
+import Footer from "./Footer";
 
 const StyledProductsGrid = styled.div`
-    display:grid;
+    display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+    margin-bottom: 50px; // Added margin-bottom for spacing from Footer
     @media (min-width: 768px){
          grid-template-columns: 1fr 1fr 1fr 1fr;
     };

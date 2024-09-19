@@ -1,4 +1,5 @@
 import Center from "@/components/Center";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ProductsGrid from "@/components/ProductsGird";
 import Title from "@/components/Title";
@@ -15,6 +16,7 @@ export default function ProductsPage({products}){
                 <Title>All Products</Title>
                 <ProductsGrid products={products} />
             </Center>
+            <Footer/>
         </>
     );
 }

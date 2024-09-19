@@ -73,7 +73,7 @@ export default function Header() {
         <StyledHeader>
             <Center>
                 <Wrapper>
-                    <Logo href={'/'}>AT-Store</Logo>
+                    <Logo href={'/'}>TUAN ANH STORE</Logo>
                     <StyledNav mobileNavActive={mobileNavActive}>
                         <NavLink href={'/'}>Home</NavLink>
                         <NavLink href={'/products'}>All Products</NavLink>
