@@ -12,23 +12,6 @@ const Bg = styled.div`
   padding: 70px 0;
   position: relative;
   overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
-    animation: gradientShift 8s ease infinite;
-  }
-
-  @keyframes gradientShift {
-    0% { opacity: 0.2; }
-    50% { opacity: 0.8; }
-    100% { opacity: 0.2; }
-  }
 `;
 
 const Title = styled.h1`
