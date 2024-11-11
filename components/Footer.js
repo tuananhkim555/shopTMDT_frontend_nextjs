@@ -11,17 +11,55 @@ import {
   FaMapMarkerAlt,
   FaGlobe 
 } from 'react-icons/fa';
+import Link from "next/link";
 
 const StyledFooter = styled.footer`
-  background-color: #222;
+  background: linear-gradient(135deg, #000000 0%, #2d2d2d 100%);
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.3);
   color: #fff;
   padding: 30px 0;
   bottom: 0;
   width: 100%;
   margin-top: 100px;
-  box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+  position: relative;
   display: flex;
   flex-direction: column;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(81, 162, 233, 0.1) 0%, rgba(0, 0, 0, 0) 50%),
+      radial-gradient(circle at 80% 20%, rgba(147, 51, 234, 0.07) 0%, rgba(0, 0, 0, 0) 50%);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.15;
+    pointer-events: none;
+    animation: subtleMove 30s linear infinite;
+  }
+
+  @keyframes subtleMove {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 60px 60px;
+    }
+  }
 `;
 
 const FooterContent = styled.div`
@@ -29,6 +67,8 @@ const FooterContent = styled.div`
   grid-template-columns: 1fr;
   gap: 20px;
   flex: 1;
+  position: relative;
+  z-index: 1;
   
   @media (min-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
@@ -107,6 +147,11 @@ const FooterText = styled.div`
       color: #fff;
     }
   }
+
+  a {
+    color: #aaa;
+    text-decoration: none;
+  }
 `;
 
 const ContactInfo = styled.div`
@@ -122,6 +167,8 @@ const Copyright = styled.div`
   border-top: 1px solid #444;
   color: #888;
   font-size: 0.85rem;
+  position: relative;
+  z-index: 1;
   
   &:hover {
     color: #aaa;
@@ -165,7 +212,7 @@ export default function Footer() {
               </FooterText>
               <FooterText>
                 <FaGlobe />
-                <span>www.tuananhdev.com</span>
+                <a href="https://www.tuananhdev.click" target="_blank" rel="noopener noreferrer">www.tuananhdev.click</a>
               </FooterText>
             </ContactInfo>
           </FooterColumn>

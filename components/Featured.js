@@ -7,11 +7,48 @@ import { useContext } from "react";
 import { CartContext } from "./CartContext";
 
 const Bg = styled.div`
-  background-color: #222;
+  background: linear-gradient(135deg, #000000 0%, #2d2d2d 100%);
   color: #fff;
   padding: 70px 0;
   position: relative;
   overflow: hidden;
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.3);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(81, 162, 233, 0.1) 0%, rgba(0, 0, 0, 0) 50%),
+      radial-gradient(circle at 80% 20%, rgba(147, 51, 234, 0.07) 0%, rgba(0, 0, 0, 0) 50%);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.15;
+    pointer-events: none;
+    animation: subtleMove 30s linear infinite;
+  }
+
+  @keyframes subtleMove {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 60px 60px;
+    }
+  }
 `;
 
 const Title = styled.h1`
@@ -21,10 +58,17 @@ const Title = styled.h1`
   letter-spacing: -0.5px;
   line-height: 1.2;
   margin-bottom: 15px;
-  background: linear-gradient(to right, #fff, #ccc);
+  background: linear-gradient(to right, #fff 20%, #64B5F6 50%, #fff 80%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: slideInLeft 1s ease-out;
+  animation: shine 3s linear infinite, slideInLeft 1s ease-out;
+  
+  @keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }
   
   @media (min-width: 768px) {
     font-size: 3.2rem;
@@ -49,6 +93,7 @@ const Desc = styled.p`
   margin-bottom: 25px;
   max-width: 600px;
   animation: fadeIn 1s ease-out 0.3s both;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   
   @media (min-width: 768px) {
     font-size: 1rem;
@@ -79,9 +124,11 @@ const ColumnWrapper = styled.div`
     margin: 0 auto;
     transition: transform 0.5s ease;
     animation: floatAnimation 3s ease-in-out infinite;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
     
     &:hover {
       transform: scale(1.05) rotate(2deg);
+      filter: drop-shadow(0 15px 30px rgba(0,0,0,0.4));
     }
   }
   
@@ -146,11 +193,16 @@ const ButtonsWrapper = styled.div`
   }
 
   button, a {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
     
     &:hover {
       transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      box-shadow: 0 5px 20px rgba(81, 162, 233, 0.3);
+    }
+    
+    &:active {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(81, 162, 233, 0.2);
     }
   }
 `;
