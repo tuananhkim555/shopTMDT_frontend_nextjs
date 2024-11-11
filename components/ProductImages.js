@@ -2,20 +2,30 @@ import { useState } from "react";
 import styled from "styled-components";
 
     const Image = styled.img`
-        max-width: 100%;
-        max-height: 100%
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     `;
+
     const BigImage = styled.img`
-        max-width: 100%;
-        max-height: 200px;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     `;
 
     const ImageButtons = styled.div`
         display: flex;
-        gap: 10px;
-        flex-grow:0;
-        margin-top:10px;
+        gap: 8px;
+        margin-top: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        @media screen and (max-width: 768px) {
+            gap: 6px;
+            margin-top: 10px;
+        }
     `;
+
     const ImageButton = styled.div`
         border: 2px solid #ccc;
         ${props => props.active ? `
@@ -24,14 +34,39 @@ import styled from "styled-components";
                 border-color: transparent;
                 opacity: .7;
             `}
-        height: 40px;
-        padding:2px;
+        width: 60px;
+        height: 60px;
+        padding: 4px;
         cursor: pointer;
         border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
 
+        @media screen and (max-width: 768px) {
+            width: 50px;
+            height: 50px;
+        }
+
+        &:hover {
+            opacity: 1;
+        }
     `;
+
     const BigImageWrapper = styled.div`
-        text-align:center;
+        width: 100%;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+
+        @media screen and (max-width: 768px) {
+            height: 250px;
+        }
     `;
 
 export default function ProductImages({images}){
@@ -39,7 +74,7 @@ export default function ProductImages({images}){
     return (
         <>  
             <BigImageWrapper>
-                <BigImage src={activeImage} />
+                <BigImage src={activeImage} alt="Product"/>
             </BigImageWrapper>
             <ImageButtons>
                 {images.map(image => (
@@ -47,7 +82,7 @@ export default function ProductImages({images}){
                         key={image} 
                         active={image===activeImage} 
                         onClick={() => setActiveImage(image)}> 
-                        <Image src={image} alt="" />
+                        <Image src={image} alt="Thumbnail" />
                     </ImageButton>
                 ))}
             </ImageButtons>

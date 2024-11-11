@@ -6,67 +6,112 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
 import Table from "@/components/Table";
+import WhiteBox from "@/components/WhiteBox";
+import Title from "@/components/Title";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import { FaShoppingCart } from 'react-icons/fa';
 
 const ColumnsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-    @media (min-width: 768px){
-        grid-template-columns: 1.2fr 0.8fr;
-    };
-  gap: 40px;
-  margin-top: 40px;
-  margin-bottom: 50px; 
-`;
+  gap: 20px;
+  margin: 20px 0 30px;
 
-const Box = styled.div`
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 30px;
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
+    margin: 40px 0 50px;
+  }
 `;
 
 const ProductInfoCell = styled.td`
-  padding: 10px 0;
+  padding: 8px 0;
+  font-size: 0.9rem;
+
+  @media screen and (min-width: 768px) {
+    padding: 10px 0;
+    font-size: 1rem;
+  }
 `;
 
 const ProductImageBox = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   padding: 2px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 8px;
+  
   img {
-    max-width: 60px;
-    max-height: 60px;
+    max-width: 50px;
+    max-height: 50px;
   }
-  @media (min-width: 768px){
-    padding: 10px;
-     width: 100px;
+
+  @media screen and (min-width: 768px) {
+    width: 100px;
     height: 100px;
+    padding: 10px;
+    border-radius: 10px;
+
     img {
       max-width: 80px;
       max-height: 80px;
     }
-  };
+  }
 `;
 
 const QuantityLabel = styled.span`
-  padding: 0 15px;
-  display:block;
-    @media (min-width: 768px){
-      display: inline-block;
-      padding: 0 5px;
-    };
+  padding: 0 10px;
+  display: block;
+  font-size: 0.9rem;
+
+  @media screen and (min-width: 768px) {
+    display: inline-block;
+    padding: 0 15px;
+    font-size: 1rem;
+  }
 `;
 
 const CityHolder = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+  }
+`;
+
+const TitleWrapper = styled.div`
   display: flex;
-  gap: 5px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  svg {
+    font-size: 1.8rem;
+    color: #555;
+  }
+`;
+
+const EmptyCartMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1.4rem;
+    padding: 60px 20px;
+  }
 `;
 
 // Function to format price with dots as thousand separators
@@ -144,12 +189,13 @@ export default function CartPage() {
         <Header />
         <Center>
           <ColumnsWrapper>
-            <Box>
-              <h1>Thanks for your order</h1>
+            <WhiteBox>
+              <Title>Thanks for your order</Title>
               <p>We will email you when your order will be sent.</p>
-            </Box>
+            </WhiteBox>
           </ColumnsWrapper>
         </Center>
+        <Footer />
       </>
     );
   }
@@ -159,9 +205,16 @@ export default function CartPage() {
       <Header />
       <Center>
         <ColumnsWrapper>
-          <Box>
-            <h2>Cart</h2>
-            {!cartProducts?.length && <div>Your cart is empty</div>}
+          <WhiteBox>
+            <TitleWrapper>
+              <FaShoppingCart />
+              <Title>Cart</Title>
+            </TitleWrapper>
+            {!cartProducts?.length && (
+              <EmptyCartMessage>
+                Your cart is empty
+              </EmptyCartMessage>
+            )}
             {products?.length > 0 && (
               <Table>
                 <thead>
@@ -211,10 +264,10 @@ export default function CartPage() {
                 </tbody>
               </Table>
             )}
-          </Box>
+          </WhiteBox>
           {!!cartProducts.length && (
-            <Box>
-              <h2>Order information</h2>
+            <WhiteBox>
+              <Title>Order information</Title>
               <Input
                 type="text"
                 placeholder="Name"
@@ -271,7 +324,7 @@ export default function CartPage() {
               >
                 Continue to payment
               </Button>
-            </Box>
+            </WhiteBox>
           )}
         </ColumnsWrapper>
       </Center>
